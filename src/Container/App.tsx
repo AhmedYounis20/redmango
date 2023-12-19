@@ -1,9 +1,11 @@
-import React from 'react';
+import { Header,Footer } from "../Compnents/Layout";
 
 function App() {
   return (
-    <div className="App">
-     App
+    <div>
+     <Header/>
+     Main Content
+    <Footer/>
     </div>
   );
 }
