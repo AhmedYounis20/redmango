@@ -1,10 +1,12 @@
 import { Header,Footer } from "../Compnents/Layout";
-
+import { Home } from "../Pages";
 function App() {
-  return (
+  
+   return (
+
     <div>
      <Header/>
-     Main Content
+     <Home/>
     <Footer/>
     </div>
   );
