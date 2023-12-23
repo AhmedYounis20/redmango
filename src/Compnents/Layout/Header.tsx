@@ -6,7 +6,7 @@ const Header:React.FC = () => {
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
   <div className="container-fluid">
-    <a href="/" className="navbar-brand" >
+    <a className="navbar-brand" href="/">
       <img src={logo} alt="" style={{height:"40px"}} className='m-1'/>
     </a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
