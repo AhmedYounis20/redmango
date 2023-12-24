@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { menuItemModel } from '../../../Interfaces';
+import MenuItemCard from './MenuItemCard';
 const MenuItemList :React.FC= () => {
    const [menuItems,setMenuItems] = useState<menuItemModel[]>([]);
   
@@ -11,9 +12,12 @@ const MenuItemList :React.FC= () => {
     })
   },[])
    return (
-
-    <div>
-        MenuItemList
+    <div className='row container mb-5'>
+    
+      {menuItems.length > 0 && 
+      menuItems.map((menuItem,index)=>
+          <MenuItemCard menuItem={menuItem} key={index} />
+      )}
     </div>
   );}
 
