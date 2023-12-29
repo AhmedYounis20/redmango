@@ -1,3 +1,3 @@
 import { menuItemModel } from "./menuItemModel";
-
-export type {menuItemModel};
+import { ApiResponse } from "./apiResponse";
+export type {menuItemModel,ApiResponse};
