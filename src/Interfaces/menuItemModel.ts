@@ -1,8 +1,8 @@
-export interface menuItemModel {
+export interface MenuItemModel {
   id: number;
   name: string;
   description: string;
-  specialTag: string;
+  specialTag?: any;
   category: string;
   price: number;
   image: string;

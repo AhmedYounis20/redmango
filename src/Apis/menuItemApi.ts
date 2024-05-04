@@ -4,19 +4,19 @@ import { ApiResponse } from "../Interfaces";
 const menuItemApi = createApi({
     reducerPath:"menuItemApi",
     baseQuery: fetchBaseQuery({
-        baseUrl:"https://redmangoapiv1.azurewebsites.net/api/",
+        baseUrl:"https://redmangoapi.azurewebsites.net/api/",
     }),
     tagTypes:["menuItems"],
     endpoints: (builder)=>({
         getMenuItems : builder.query<ApiResponse,any>({
             query:()=>({
-                url:"menuItems"
+                url:"menuItem"
             }),
             providesTags:["menuItems"]
         }),
         getMenuItemById : builder.query({
             query:(id)=>({
-                url:`menuItems/${id}`
+                url:`menuItem/${id}`
             }),
             providesTags:["menuItems"]
         }),
