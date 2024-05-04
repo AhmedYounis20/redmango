@@ -1,13 +1,22 @@
 import React from 'react'
-import { menuItemModel } from '../../../Interfaces'
+import { MenuItemModel } from '../../../Interfaces'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-
+import { useUpdateShoppingCartMutation } from '../../../Apis/shoppingCartApi'
+import {MiniLoader} from '../..'
 interface Props {
-    menuItem: menuItemModel
+    menuItem: MenuItemModel
 }
 function MenuItemCard(props:Props) {
     const [isAddingToCart,setIsAddingToCart] =useState<Boolean>(false);
+  const [updateShoppingCart] = useUpdateShoppingCartMutation();
+
+  const handleAddToCart = async (menuItemId:number)=>{
+      setIsAddingToCart(true);
+      const response = await updateShoppingCart({menuItemId,updateQuantityBy:1,userId:"046300b4-b4f8-4c63-aba8-6e05a4534cd6",});
+      console.log(response);
+      setIsAddingToCart(false);
+  }
   return (
     <div className="col-md-4 col-12 p-4">
       <div
@@ -51,7 +60,7 @@ function MenuItemCard(props:Props) {
                 right: "15px",
               }}
             >
-              {/* <MiniLoader /> */}
+              <MiniLoader/>
             </div>
           ) : (
             <i
@@ -65,7 +74,7 @@ function MenuItemCard(props:Props) {
                 outline: "none !important",
                 cursor: "pointer",
               }}
-            //   onClick={() => handleAddToCart(props.menuItem.id)}
+              onClick={() => handleAddToCart(props.menuItem.id)}
             ></i>
           )}
 
