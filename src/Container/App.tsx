@@ -1,5 +1,5 @@
 import { Header,Footer } from "../Compnents/Layout";
-import { Home, MenuItemDetails } from "../Pages";
+import { Home, Login, MenuItemDetails, Register } from "../Pages";
 import { Route, Routes } from "react-router-dom";
 import {NotFound} from "../Pages";
 import { useEffect } from "react";
@@ -18,17 +18,22 @@ function App() {
   }, [data]);
 
    return (
-    <div>
-     <Header/>
-     <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route path="/menuItemDetails/:menuItemId" element={<MenuItemDetails/>} />
-      <Route path="/shoppingCart" element={<ShoppingCartDetails/>} />
-      <Route path="*" element={<NotFound/>} />
-     </Routes>
-    <Footer/>
-    </div>
-  );
+     <div>
+       <Header />
+       <Routes>
+         <Route path="/" element={<Home />} />
+         <Route
+           path="/menuItemDetails/:menuItemId"
+           element={<MenuItemDetails />}
+         />
+         <Route path="/shoppingCart" element={<ShoppingCartDetails />} />
+         <Route path="/login" element={<Login />} />
+         <Route path="/register" element={<Register />} />
+         <Route path="*" element={<NotFound />} />
+       </Routes>
+       <Footer />
+     </div>
+   );
 }
 
 export default App;
