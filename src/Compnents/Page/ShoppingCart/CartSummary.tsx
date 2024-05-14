@@ -10,6 +10,8 @@ function CartSummary() {
   const shoppingCartFromStore = useSelector(
     (state:RootState) => state.shoppingCartStore?.cartItems ?? []
   );
+    const userData = useSelector((state: RootState) => state.userAuthStore);
+
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
 
@@ -34,14 +36,14 @@ function CartSummary() {
     cartItem: CartItemModel
   ) => {
     if (
-      (updateQuantityBy == -1 && cartItem.quantity == 1) ||
-      updateQuantityBy == 0
+      (updateQuantityBy === -1 && cartItem.quantity === 1) ||
+      updateQuantityBy === 0
     ) {
       //remove the item
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: 0,
-        userId: "046300b4-b4f8-4c63-aba8-6e05a4534cd6",
+        userId: userData.id,
       });
       dispatch(removeFromCart({ cartItem, quantity: 0 }));
     } else {
@@ -49,7 +51,7 @@ function CartSummary() {
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: updateQuantityBy,
-        userId: "046300b4-b4f8-4c63-aba8-6e05a4534cd6",
+        userId: userData.id,
       });
       dispatch(
         updateQuantity({

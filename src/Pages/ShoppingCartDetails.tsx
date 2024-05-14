@@ -1,6 +1,7 @@
 import React from 'react'
 import { CartSummary } from '../Compnents/Page/ShoppingCart'
 import CartPickupDetails from '../Compnents/Page/ShoppingCart/CartPickupDetails';
+import { withAdminAuthorization, withAuth } from '../HOC';
 
 const ShoppingCartDetails = () => {
   return (
@@ -15,4 +16,4 @@ const ShoppingCartDetails = () => {
   );
 }
 
-export default ShoppingCartDetails
+export default withAuth(ShoppingCartDetails);

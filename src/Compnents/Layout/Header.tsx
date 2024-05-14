@@ -1,16 +1,23 @@
 import React from 'react'
 import { logo } from '../../Assets/Images'
-import { NavLink } from 'react-router-dom'
-import { CartItemModel } from '../../Interfaces'
-import { useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { CartItemModel, userModel } from '../../Interfaces'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../Storage/Redux/store'
-
+import { initialuserState, setLoggedInUser } from '../../Storage/Redux/userAuthSlice'
 const Header:React.FC = () => {
   const shoppingCartfromStore : CartItemModel []  = useSelector(
     (state:RootState) => state.shoppingCartStore?.cartItems ?? []
   );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-
+    const userData : userModel  =  useSelector((state:RootState) => state.userAuthStore);
+    const handleLogout = ()=>{
+      localStorage.removeItem('token');
+      dispatch(setLoggedInUser(initialuserState));
+      navigate("/login");
+    }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -43,7 +50,9 @@ const Header:React.FC = () => {
                   to="/ShoppingCart"
                 >
                   <i className="bi bi-cart"></i>
-                  {shoppingCartfromStore.length ? `(${shoppingCartfromStore.length})`:""}
+                  {shoppingCartfromStore.length
+                    ? `(${shoppingCartfromStore.length})`
+                    : ""}
                 </NavLink>
               </li>
               <li className="nav-item dropdown">
@@ -74,25 +83,44 @@ const Header:React.FC = () => {
                   </li>
                 </ul>
               </li>
-                  <div className='d-flex' style={{marginLeft:'auto'}}>
-                    <li className='nav-item pt-1'>
-                      <button className="btn btn-success btn-outlined rounded-pill text-white mx-2"
+              <div className="d-flex" style={{ marginLeft: "auto" }}>
+                {userData.id ? (
+                  <li className="nav-item pt-1">
+                    <button
+                      className="btn btn-success btn-outlined rounded-pill text-white mx-2"
                       style={{
-                        border:"none",
-                        height:"40px",
-                        width:"100px"
-                      }}>
-                        logout
-                      </button>
+                        border: "none",
+                        height: "40px",
+                        width: "100px",
+                      }}
+                      onClick={()=>handleLogout()}
+                    >
+                      logout
+                    </button>
+                  </li>
+                ) : (
+                  <>
+                    <li className="nav-item pt-1">
+                      <NavLink
+                        className="btn btn-success btn-outlined rounded-pill text-white mx-2"
+                        style={{
+                          border: "none",
+                          height: "40px",
+                          width: "100px",
+                        }}
+                        to="/login"
+                      >
+                        Login
+                      </NavLink>
                     </li>
-
                     <li className="nav-item text-white">
                       <NavLink className="nav-link" to="/register">
                         Register
                       </NavLink>
                     </li>
-
-                  </div>
+                  </>
+                )}
+              </div>
             </ul>
           </div>
         </div>

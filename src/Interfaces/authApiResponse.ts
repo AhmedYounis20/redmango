@@ -2,7 +2,7 @@ export type authApiResponse = {
   data?: {
     statusCode: number;
     isSucess: boolean;
-    messageErrors?: Array<string>;
+    errorMessages?: Array<string>;
     result: any;
   };
   error?: any;
