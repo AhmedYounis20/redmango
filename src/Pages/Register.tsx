@@ -3,6 +3,7 @@ import { SD_Roles } from '../Utility/SD';
 import { ApiResponse, UserRegisterModel, authApiResponse } from '../Interfaces';
 import { inputHelper } from '../Helper';
 import { useRegisterMutation } from '../Apis/authApi';
+import { toastify } from '../Helper/toastify';
 
 const Register = () => {
     const [registerUser] = useRegisterMutation();
@@ -27,6 +28,10 @@ const Register = () => {
         }
         else {
             console.log(response.error.data.errorMessages[0]);
+      response.error.data.errorMessages.map((e: string) =>
+        toastify(e, "error")
+      );
+
         }
 
     }
